@@ -20,7 +20,7 @@ def process_product(product):
     
     score = get_score(classified_comments)
     
-    features = get_features(classified_comments)
+    features = get_features(comments)
     
     
     response = {
