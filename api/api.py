@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
-from processing import get_comments, classify_comments, get_score, get_features, product_image
+from processing import get_comments, classify_comments, evaluate_comments
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -14,13 +14,11 @@ def homepage():
 @cross_origin()
 def process_product(product):
     
-    comments = get_comments(product)
+    comments, product_image = get_comments(product)
     
     classified_comments = classify_comments(comments)
     
-    score = get_score(classified_comments)
-    
-    features = get_features(comments)
+    score, features = evaluate_comments(classified_comments)
     
     
     response = {
